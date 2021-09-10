@@ -7,8 +7,12 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect
 
 logging:
   level:
     org.hibernate.SQL: trace
+    org.hibernate.type: trace
