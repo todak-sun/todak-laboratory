@@ -7,9 +7,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Document("post")
+@Document("posts")
 @Getter
 public class Post {
 
@@ -26,13 +27,24 @@ public class Post {
 
     private LocalDateTime updatedAt;
 
-    public Post(String title, String content, String author) {
+    private User writtenBy;
+
+    public void changeContent(String content) {
+        this.content = content;
+    }
+
+    public void writtenBy(User user){
+        this.writtenBy = user;
+    }
+
+    public Post(String title, String content, String author, User writtenBy) {
         this.title = title;
         this.content = content;
         this.author = author;
         LocalDateTime now = LocalDateTime.now();
         this.writtenAt = now;
         this.updatedAt = now;
+        this.writtenBy = writtenBy;
     }
 
     @Override
@@ -45,5 +57,18 @@ public class Post {
                 ", writtenAt=" + writtenAt +
                 ", updatedAt=" + updatedAt +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Post post = (Post) o;
+        return Objects.equals(id, post.id) && Objects.equals(title, post.title) && Objects.equals(content, post.content) && Objects.equals(author, post.author) && Objects.equals(writtenAt, post.writtenAt) && Objects.equals(updatedAt, post.updatedAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, content, author, writtenAt, updatedAt);
     }
 }

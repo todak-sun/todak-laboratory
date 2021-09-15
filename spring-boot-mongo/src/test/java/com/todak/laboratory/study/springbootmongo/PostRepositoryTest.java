@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,9 +24,12 @@ class PostRepositoryTest {
     @Autowired
     PostRepository postRepository;
 
+    @Autowired
+    MongoTemplate mongoTemplate;
+
     @Test
     public void saveTest() {
-        Post save = postRepository.save(new Post("title", "content", "author"));
+        Post save = postRepository.save(new Post("title", "content", "author", null));
         log.info("save : {}", save);
         postRepository.deleteAll();
     }
@@ -31,7 +37,7 @@ class PostRepositoryTest {
     @Test
     public void pagingTest() {
         List<Post> posts = IntStream.rangeClosed(1, 100)
-                .mapToObj((i) -> new Post("title" + i, "content" + i, "author" + i))
+                .mapToObj((i) -> new Post("title" + i, "content" + i, "author" + i, null))
                 .collect(Collectors.toList());
 
         postRepository.saveAll(posts);
@@ -45,6 +51,26 @@ class PostRepositoryTest {
 
         assertEquals(content.size(), 10);
         postRepository.deleteAll();
+    }
+
+    @Test
+    public void query() {
+
+//        User savedUser = mongoTemplate.save(new User("todak-sun", "email@email.com"));
+        mongoTemplate.save(new Post("title", "content", "author", null));
+
+    }
+
+    @Test
+    public void findQuery() {
+
+
+
+        List<Post> posts = mongoTemplate.find(Query.query(Criteria.where("writtenBy.name")
+                .is("todak-sun")
+        ), Post.class);
+
+        log.info("posts : {}", posts);
     }
 
 }
