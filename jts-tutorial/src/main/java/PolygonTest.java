@@ -9,6 +9,7 @@ public class PolygonTest {
     public PolygonTest() {
         GeometryFactory factory = new GeometryFactory();
         LinearRing linearRing = factory.createLinearRing();
+        int boundaryDimension = linearRing.getBoundaryDimension();
 
     }
 
