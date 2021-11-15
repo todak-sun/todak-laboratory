@@ -1,0 +1,33 @@
+package tutorial02;
+
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
+public abstract class DeligateSubscriber<T> implements Subscriber<T> {
+
+    private Subscriber<? super T> subscriber;
+
+    public DeligateSubscriber(Subscriber<? super T> subscriber) {
+        this.subscriber = subscriber;
+    }
+
+    @Override
+    public void onSubscribe(Subscription subscription) {
+        this.subscriber.onSubscribe(subscription);
+    }
+
+    @Override
+    public void onNext(T t) {
+        this.subscriber.onNext(t);
+    }
+
+    @Override
+    public void onError(Throwable throwable) {
+        this.subscriber.onError(throwable);
+    }
+
+    @Override
+    public void onComplete() {
+        this.subscriber.onComplete();
+    }
+}

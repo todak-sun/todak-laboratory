@@ -12,6 +12,7 @@
 
     <modules>
         <module>jts-tutorial</module>
+        <module>stream-tutorial</module>
     </modules>
 
 
