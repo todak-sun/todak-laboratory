@@ -3,11 +3,11 @@ package tutorial02;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
-public abstract class DeligateSubscriber<T> implements Subscriber<T> {
+public abstract class DeligateSubscriber<T, R> implements Subscriber<T> {
 
-    private Subscriber<? super T> subscriber;
+    private Subscriber subscriber;
 
-    public DeligateSubscriber(Subscriber<? super T> subscriber) {
+    public DeligateSubscriber(Subscriber<? super R> subscriber) {
         this.subscriber = subscriber;
     }
 
