@@ -13,7 +13,9 @@ public class StreamOperator {
         Publisher<Integer> iterPub = new IterablePublisher<>(iter);
         Publisher<String> mapPub = new MapPublisher<>(iterPub, (n) -> String.format("%d * %d = %d", n, n, n * n));
         Publisher<Integer> reducePub = new ReducePublisher<>(mapPub, 1423, (acc, curr) -> acc - curr.length());
-        reducePub.subscribe(new LogSubscriber<>());
+//        reducePub.subscribe(new LogSubscriber<>());
+        FilterPublisher<Integer> filterPub = new FilterPublisher<>(iterPub, (n) -> n % 2 == 0);
+        filterPub.subscribe(new LogSubscriber<>());
     }
 
 
