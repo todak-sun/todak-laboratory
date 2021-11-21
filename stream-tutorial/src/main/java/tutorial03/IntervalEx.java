@@ -16,7 +16,7 @@ public class IntervalEx {
         Publisher<Integer> pub = sub -> {
             sub.onSubscribe(new Subscription() {
                 int no = 0;
-                boolean cancelled = false;
+                volatile boolean cancelled = false;
 
                 @Override
                 public void request(long n) {
@@ -57,7 +57,7 @@ public class IntervalEx {
                 @Override
                 public void onNext(Integer integer) {
                     sub.onNext(integer);
-                    if (count++ > 10) {
+                    if (++count > 4) {
                         sbusc.cancel();
                     }
                 }
