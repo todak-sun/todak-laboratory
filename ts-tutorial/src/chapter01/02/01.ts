@@ -5,3 +5,4 @@ function add(a, b) {
 }
 
 add(10, null);
+
