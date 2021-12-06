@@ -1,7 +1,8 @@
 package io.todak.study.laboratory.designpattern._04_builder._02_after;
 
-import me.whiteship.designpatterns._01_creational_patterns._04_builder._01_before.DetailPlan;
-import me.whiteship.designpatterns._01_creational_patterns._04_builder._01_before.TourPlan;
+
+import io.todak.study.laboratory.designpattern._04_builder._01_before.DetailPlan;
+import io.todak.study.laboratory.designpattern._04_builder._01_before.TourPlan;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
