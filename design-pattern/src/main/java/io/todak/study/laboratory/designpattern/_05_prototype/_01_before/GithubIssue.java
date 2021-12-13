@@ -1,6 +1,6 @@
 package io.todak.study.laboratory.designpattern._05_prototype._01_before;
 
-public class GithubIssue {
+class GithubIssue {
 
     private int id;
     private String title;

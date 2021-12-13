@@ -1,6 +1,6 @@
 package io.todak.study.laboratory.designpattern._05_prototype._01_before;
 
-public class App {
+class App {
 
     public static void main(String[] args) {
         GithubRepository repository = new GithubRepository();

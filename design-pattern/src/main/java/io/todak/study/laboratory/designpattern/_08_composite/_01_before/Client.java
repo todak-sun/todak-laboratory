@@ -1,6 +1,6 @@
 package io.todak.study.laboratory.designpattern._08_composite._01_before;
 
-public class Client {
+ class Client {
 
     public static void main(String[] args) {
         Item doranBlade = new Item("도란검", 450);
